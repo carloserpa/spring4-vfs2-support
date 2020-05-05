@@ -49,7 +49,7 @@ public class Vfs2ResourceHandlerRegistry {
 
     private final ApplicationContext      applicationContext;
 
-    Vfs2ResourceHandlerRegistry(ResourceHandlerRegistry resourceHandlerRegistry, ApplicationContext applicationContext) {
+    public Vfs2ResourceHandlerRegistry(ResourceHandlerRegistry resourceHandlerRegistry, ApplicationContext applicationContext) {
         this.resourceHandlerRegistry = resourceHandlerRegistry;
         this.applicationContext = applicationContext;
     }

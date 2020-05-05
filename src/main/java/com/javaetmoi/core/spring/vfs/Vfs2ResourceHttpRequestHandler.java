@@ -26,6 +26,7 @@ import org.springframework.core.io.AbstractFileResolvingResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.util.ResourceUtils;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 
@@ -45,7 +46,9 @@ class Vfs2ResourceHttpRequestHandler extends ResourceHttpRequestHandler {
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
 
-        checkAndPrepare(request, response, true);
+       /* checkAndPrepare(request, response, true);*/
+    	checkRequest(request);
+		prepareResponse(response);
 
         // check whether a matching resource exists
         Resource resource = getResource(request);
@@ -85,7 +88,8 @@ class Vfs2ResourceHttpRequestHandler extends ResourceHttpRequestHandler {
             logger.trace("HEAD request - skipping content");
             return;
         }
-        writeContent(response, resource);
+        //writeContent(response, resource);
+        StreamUtils.copy(resource.getInputStream(), response.getOutputStream());
     }
 
 }

@@ -38,12 +38,13 @@ import org.springframework.web.servlet.resource.ResourceHttpRequestHandler;
 class Vfs2ResourceHandlerRegistration extends ResourceHandlerRegistration {
 
     public Vfs2ResourceHandlerRegistration(ResourceLoader resourceLoader, String... pathPatterns) {
-        super(resourceLoader, pathPatterns);
+        /*super(resourceLoader, pathPatterns);*/
+    	super(pathPatterns);
     }
 
     @Override
     protected ResourceHttpRequestHandler getRequestHandler() {
-        Field locationsField = ReflectionUtils.findField(ResourceHandlerRegistration.class, "locations");
+        Field locationsField = ReflectionUtils.findField(ResourceHandlerRegistration.class, "locationValues");
         ReflectionUtils.makeAccessible(locationsField);
         @SuppressWarnings("unchecked")
         List<Resource> locations = (List<Resource>) ReflectionUtils.getField(locationsField, this);
